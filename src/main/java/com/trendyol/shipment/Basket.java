@@ -1,5 +1,7 @@
 package com.trendyol.shipment;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Basket {
@@ -7,7 +9,12 @@ public class Basket {
     private List<Product> products;
 
     public ShipmentSize getShipmentSize() {
-        return null;
+        ShipmentSizeManager manager = new ShipmentSizeManager(this);
+        return manager.determineSize();
+    }
+
+    public boolean isEmpty() {
+        return products == null || products.isEmpty();
     }
 
     public List<Product> getProducts() {
