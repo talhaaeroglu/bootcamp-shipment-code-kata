@@ -1,16 +1,18 @@
 package com.trendyol.shipment;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class Basket {
 
+public class Basket {
     private List<Product> products;
+    private final IShipmentSizeDeterminer determiner;
+
+    public Basket(IShipmentSizeDeterminer determiner) {
+        this.determiner = determiner;
+    }
 
     public ShipmentSize getShipmentSize() {
-        ShipmentSizeManager manager = new ShipmentSizeManager(this);
-        return manager.determineSize();
+        return determiner.determineSize(this);
     }
 
     public boolean isEmpty() {
